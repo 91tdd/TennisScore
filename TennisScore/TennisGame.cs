@@ -28,7 +28,12 @@ namespace TennisScore
                 return scoreMapping[game.FirstPlayerScore] + " " + scoreMapping[game.SecondPlayerScore];
             }
 
-            return "Love All";
+            if (game.FirstPlayerScore == 3)
+            {
+                return "Deuce";
+            }
+
+            return scoreMapping[game.FirstPlayerScore] + " All";
         }
     }
 }
