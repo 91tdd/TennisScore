@@ -63,6 +63,7 @@
     <Compile Include="IRepository.cs" />
     <Compile Include="TennisGame.cs" />
     <Compile Include="UnitTest1.cs" />
+    <Compile Include="UnitTest2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

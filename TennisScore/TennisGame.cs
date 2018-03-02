@@ -15,32 +15,16 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
-            // 第一種 Win
-            if (game.FirstPlayerScore > 4 &&
-                game.FirstPlayerScore - game.SecondPlayerScore >= 2)
+            var check = CheckWin(game.FirstPlayerName, game.FirstPlayerScore, game.SecondPlayerScore);
+            if (check != "")
             {
-                return game.FirstPlayerName + " Win";
+                return check;
             }
 
-            // 第二種 Win
-            if (game.FirstPlayerScore == 4 &&
-                game.SecondPlayerScore <= 2)
+            check = CheckWin(game.SecondPlayerName, game.SecondPlayerScore, game.FirstPlayerScore);
+            if (check != "")
             {
-                return game.FirstPlayerName + " Win";
-            }
-
-            // 第一種 Win
-            if (game.SecondPlayerScore > 4 &&
-                game.SecondPlayerScore - game.FirstPlayerScore >= 2)
-            {
-                return game.SecondPlayerName + " Win";
-            }
-
-            // 第二種 Win
-            if (game.SecondPlayerScore == 4 &&
-                game.FirstPlayerScore <= 2)
-            {
-                return game.SecondPlayerName + " Win";
+                return check;
             }
 
             // 平手
@@ -78,6 +62,27 @@ namespace TennisScore
             }
 
             return GetScoreName(game.FirstPlayerScore) + " " + GetScoreName((game.SecondPlayerScore));
+        }
+
+        private static string CheckWin(string name, int score, int other_score)
+        {
+            // 第一種 Win
+            if (score > 4 && score - other_score >= 2)
+            {
+                {
+                    return name + " Win";
+                }
+            }
+
+            // 第二種 Win
+            if (score == 4 && other_score <= 2)
+            {
+                {
+                    return name + " Win";
+                }
+            }
+
+            return "";
         }
 
         string GetScoreName(int score)

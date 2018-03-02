@@ -9,127 +9,229 @@ namespace TennisScore
         [TestMethod]
         public void Love_All()
         {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 0, SecondPlayerScore = 0, FirstPlayerName = "Joey", SecondPlayerName = "Tom"});
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Love All", scoreResult);
-        }
-
-        [TestMethod]
-        public void Joey_Win()
-        {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 4, SecondPlayerScore = 0, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Joey Win", scoreResult);
-        }
-
-        [TestMethod]
-        public void Joey_Win_2()
-        {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 5, SecondPlayerScore = 3, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Joey Win", scoreResult);
-        }
-
-        [TestMethod]
-        public void Tom_Win()
-        {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 1, SecondPlayerScore = 4, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Tom Win", scoreResult);
-        }
-
-        [TestMethod]
-        public void Deuce()
-        {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 4, SecondPlayerScore = 4, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Deuce", scoreResult);
-        }
-
-        [TestMethod]
-        public void Adv()
-        {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 4, SecondPlayerScore = 3, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Joey Adv", scoreResult);
-        }
-
-        [TestMethod]
-        public void Thirty_All()
-        {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 2, SecondPlayerScore = 2, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Thirty All", scoreResult);
+            Game g = new Game { Id = 1, FirstPlayerScore = 0, SecondPlayerScore = 0 };
+            string checkResult = "Love All";
+            TestBase(g, checkResult);
         }
 
         [TestMethod]
         public void Fifteen_Love()
         {
-            var gameId = 1;
-
-            IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 1, SecondPlayerScore = 0, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
-
-            TennisGame tennisGame = new TennisGame(repo);
-
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Fifteen Love", scoreResult);
+            Game g = new Game { Id = 1,
+                FirstPlayerScore = 1,
+                SecondPlayerScore = 0 };
+            string checkResult = "Fifteen Love";
+            TestBase(g, checkResult);
         }
 
         [TestMethod]
-        public void Thirty_Fifteen()
+        public void Thirty_Love()
         {
-            var gameId = 1;
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 2,
+                SecondPlayerScore = 0
+            };
+            string checkResult = "Thirty Love";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Forty_Love()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 3,
+                SecondPlayerScore = 0
+            };
+            string checkResult = "Forty Love";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Love_Fifteen()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 0,
+                SecondPlayerScore = 1
+            };
+            string checkResult = "Love Fifteen";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Fifteen_All()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 1,
+                SecondPlayerScore = 1
+            };
+            string checkResult = "Fifteen All";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Thirty_All()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 2,
+                SecondPlayerScore = 2
+            };
+            string checkResult = "Thirty All";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Deuce()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 3,
+                SecondPlayerScore = 3
+            };
+            string checkResult = "Deuce";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Deuce_4()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 4,
+                SecondPlayerScore = 4
+            };
+            string checkResult = "Deuce";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Joey_Adv()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 4,
+                SecondPlayerScore = 3
+            };
+            string checkResult = "Joey Adv";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Tom_Adv()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 3,
+                SecondPlayerScore = 4
+            };
+            string checkResult = "Tom Adv";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Joey_Win_64()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 6,
+                SecondPlayerScore = 4
+            };
+            string checkResult = "Joey Win";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Joey_Win_40()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 4,
+                SecondPlayerScore = 0
+            };
+            string checkResult = "Joey Win";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Joey_Win_41()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 4,
+                SecondPlayerScore = 1
+            };
+            string checkResult = "Joey Win";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Joey_Win_42()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 4,
+                SecondPlayerScore = 2
+            };
+            string checkResult = "Joey Win";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Tom_Win_57()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 5,
+                SecondPlayerScore = 7
+            };
+            string checkResult = "Tom Win";
+            TestBase(g, checkResult);
+        }
+
+        [TestMethod]
+        public void Tom_Win_24()
+        {
+            Game g = new Game
+            {
+                Id = 1,
+                FirstPlayerScore = 2,
+                SecondPlayerScore = 4
+            };
+            string checkResult = "Tom Win";
+            TestBase(g, checkResult);
+        }
+
+        public void TestBase(Game game, string check)
+        {
+            game.FirstPlayerName = "Joey";
+            game.SecondPlayerName = "Tom";
 
             IRepository<Game> repo = Substitute.For<IRepository<Game>>();
-            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 2, SecondPlayerScore = 1, FirstPlayerName = "Joey", SecondPlayerName = "Tom" });
+            repo.GetGame(game.Id).Returns(game);
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual("Thirty Fifteen", scoreResult);
+            var scoreResult = tennisGame.ScoreResult(game.Id);
+            
+            Assert.AreEqual(check, scoreResult);
         }
     }
 }
