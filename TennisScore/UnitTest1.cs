@@ -52,7 +52,7 @@ namespace TennisScore
             TennisGame tennisGame = new TennisGame(repo);
 
             var scoreResult = tennisGame.ScoreResult(gameId);
-            Assert.AreEqual(result, scoreResult);
+            Assert.AreEqual(result?.ToLower(), scoreResult?.ToLower());
         }
     }
 }
