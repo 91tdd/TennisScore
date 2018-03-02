@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TennisScore
+﻿namespace TennisScore
 {
     public class TennisGame
     {
@@ -14,8 +12,14 @@ namespace TennisScore
         public string ScoreResult(int gameId)
         {
             var game = this._repo.GetGame(gameId);
+            return game.IsDifferentScore()
+                ? (game.IsAlreadyForWin() ? game.AdvStatement() : game.NormalScore())
+                : (game.IsDeuce() ? Deuce() : game.SameScore());
+        }
 
-            throw new NotImplementedException();
+        private static string Deuce()
+        {
+            return "Deuce";
         }
     }
 }
