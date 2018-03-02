@@ -15,7 +15,12 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
-            throw new NotImplementedException();
+            if (game.FirstPlayerScore == 0 & game.SecondPlayerScore == 0)
+            {
+                return "Love All";
+            }
+
+            return "";
         }
     }
 }
