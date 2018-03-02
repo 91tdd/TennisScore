@@ -92,6 +92,18 @@ namespace TennisScore
             AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Deuce");
         }
 
+        [TestMethod]
+        public void DeuceWith4()
+        {
+            var gameId = 1;
+
+            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = 4, SecondPlayerScore = 4 });
+
+            TennisGame tennisGame = new TennisGame(repo);
+
+            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Deuce");
+        }
+
         private void AssertScoreShouldBe(string scoreResult, string expected)
         {
             Assert.AreEqual(expected, scoreResult);

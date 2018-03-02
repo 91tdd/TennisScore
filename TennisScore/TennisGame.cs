@@ -28,7 +28,7 @@ namespace TennisScore
                 return scoreMapping[game.FirstPlayerScore] + " " + scoreMapping[game.SecondPlayerScore];
             }
 
-            if (game.FirstPlayerScore == 3)
+            if (game.FirstPlayerScore >= 3)
             {
                 return "Deuce";
             }
