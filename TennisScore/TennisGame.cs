@@ -13,6 +13,10 @@
         {
             var game = this._repo.GetGame(gameId);
 
+            if (game.FirstPlayerScore == 1)
+            {
+                return "Fifteen Love";
+            }
             return "Love All";
         }
     }
