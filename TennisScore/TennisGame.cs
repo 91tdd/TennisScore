@@ -47,7 +47,7 @@ namespace TennisScore
             return scoreMapping[game.FirstPlayerScore] + " " + scoreMapping[game.SecondPlayerScore];
         }
 
-        private static bool IsNormalScore(Game game)
+        private bool IsNormalScore(Game game)
         {
             return game.FirstPlayerScore != game.SecondPlayerScore;
         }

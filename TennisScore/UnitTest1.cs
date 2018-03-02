@@ -17,7 +17,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Love All");
+            ScoreShouldBe("Love All", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Fifteen Love");
+            ScoreShouldBe("Fifteen Love", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Thirty Love");
+            ScoreShouldBe("Thirty Love", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Forty Love");
+            ScoreShouldBe("Forty Love", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Love Fifteen");
+            ScoreShouldBe("Love Fifteen", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Fifteen All");
+            ScoreShouldBe("Fifteen All", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Deuce");
+            ScoreShouldBe("Deuce", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Deuce");
+            ScoreShouldBe("Deuce", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Joey Adv");
+            ScoreShouldBe("Joey Adv", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Tom Adv");
+            ScoreShouldBe("Tom Adv", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Joey Win");
+            ScoreShouldBe("Joey Win", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Tom Win");
+            ScoreShouldBe("Tom Win", tennisGame.ScoreResult(gameId));
         }
 
         [TestMethod]
@@ -161,15 +161,15 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            AssertScoreShouldBe(tennisGame.ScoreResult(gameId), "Joey Win");
+            ScoreShouldBe("Joey Win", tennisGame.ScoreResult(gameId));
         }
 
         private void GivenPlayerScore(int gameId, int firstPlayerScore, int secondPlayerScore)
         {
-            repo.GetGame(gameId).Returns(new Game {Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore});
+            repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore });
         }
 
-        private void AssertScoreShouldBe(string scoreResult, string expected)
+        private void ScoreShouldBe(string expected, string scoreResult)
         {
             Assert.AreEqual(expected, scoreResult);
         }
