@@ -71,8 +71,15 @@ namespace TennisScore
         [TestMethod]
         public void FirstPlayer_Adv()
         {
-            GivenGameRecord(4, 3, firstPlayerName, secondPlayerName);
-            NewMethod("Joey Adv");
+            GivenGameRecord(4, 3);
+            NewMethod($"{firstPlayerName} Adv");
+        }
+
+        [TestMethod]
+        public void SecondPlayer_Adv()
+        {
+            GivenGameRecord(3, 4);
+            NewMethod($"{secondPlayerName} Adv");
         }
 
         private void NewMethod(string expected)
@@ -82,12 +89,14 @@ namespace TennisScore
 
         private void GivenGameRecord(int firstPlayerScore, int secondPlayerScore)
         {
-            this.repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore });
-        }
-
-        private void GivenGameRecord(int firstPlayerScore, int secondPlayerScore, string firstPlayerName, string secondPlayerName)
-        {
-            this.repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore, FirstPlayerName = firstPlayerName, SecondPlayerName = secondPlayerName });
+            this.repo.GetGame(gameId).Returns(new Game
+            {
+                Id = gameId,
+                FirstPlayerScore = firstPlayerScore,
+                SecondPlayerScore = secondPlayerScore,
+                FirstPlayerName = firstPlayerName,
+                SecondPlayerName = secondPlayerName
+            });
         }
     }
 }
