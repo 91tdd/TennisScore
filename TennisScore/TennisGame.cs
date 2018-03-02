@@ -25,6 +25,10 @@ namespace TennisScore
 
             if (game.FirstPlayerScore != game.SecondPlayerScore)
             {
+                if (game.SecondPlayerScore > 3)
+                {
+                    return game.SecondPlayerName + " Adv";
+                }
                 if (game.FirstPlayerScore > 3)
                 {
                     return game.FirstPlayName + " Adv";
