@@ -59,6 +59,13 @@ namespace TennisScore
             NewMethod("Deuce");
         }
 
+        [TestMethod]
+        public void Deuce_When_4_4()
+        {
+            GivenGameRecord(4, 4);
+            NewMethod("Deuce");
+        }
+
         private void NewMethod(string expected)
         {
             Assert.AreEqual(expected, tennisGame.ScoreResult(gameId));
