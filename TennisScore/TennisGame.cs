@@ -37,7 +37,8 @@ namespace TennisScore
             {
                 return Deuce();
             }
-            return "Love All";
+
+            return scoreLookUp[game.FirstPlayerScore] + " All";
         }
 
         private static string Deuce()
