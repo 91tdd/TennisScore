@@ -17,18 +17,15 @@ namespace TennisScore
 
             Dictionary<int, string> scoreMapping = new Dictionary<int, string>
             {
+                {0, "Love"},
                 {1, "Fifteen"},
                 {2, "Thirty"},
                 {3, "Forty"},
             };
 
-            if (game.SecondPlayerScore > 0)
+            if (game.FirstPlayerScore != game.SecondPlayerScore)
             {
-                return "Love " + scoreMapping[game.SecondPlayerScore];
-            }
-            if (game.FirstPlayerScore > 0)
-            {
-                return scoreMapping[game.FirstPlayerScore] + " Love";
+                return scoreMapping[game.FirstPlayerScore] + " " + scoreMapping[game.SecondPlayerScore];
             }
 
             return "Love All";
