@@ -23,25 +23,41 @@ namespace TennisScore
         public string ScoreResult(int gameId)
         {
             var game = this._repo.GetGame(gameId);
-            if (game.FirstPlayerScore != game.SecondPlayerScore)
+            if (IsDifferentScore(game))
             {
                 if (IsAlreadyForWin(game))
                 {
-                    if (IsAdv(game))
-                    {
-                        return AdvPlayer(game) + " Adv";
-                    }
-
-                    return AdvPlayer(game) + " Win";
+                    return AdvPlayer(game) + (IsAdv(game) ? " Adv" : " Win");
                 }
-                return scoreLookUp[game.FirstPlayerScore] + " " + scoreLookUp[game.SecondPlayerScore];
+
+                return NormalScore(game);
             }
 
-            if (game.FirstPlayerScore >= 3)
+            if (IsDeuce(game))
             {
-                return "Deuce";
+                return Deuce();
             }
             return "Love All";
+        }
+
+        private static string Deuce()
+        {
+            return "Deuce";
+        }
+
+        private static bool IsDeuce(Game game)
+        {
+            return game.FirstPlayerScore >= 3;
+        }
+
+        private static bool IsDifferentScore(Game game)
+        {
+            return game.FirstPlayerScore != game.SecondPlayerScore;
+        }
+
+        private string NormalScore(Game game)
+        {
+            return scoreLookUp[game.FirstPlayerScore] + " " + scoreLookUp[game.SecondPlayerScore];
         }
 
         private static bool IsAlreadyForWin(Game game)
