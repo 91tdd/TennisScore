@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TennisScore
+﻿namespace TennisScore
 {
     public class TennisGame
     {
@@ -15,7 +13,7 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
-            throw new NotImplementedException();
+            return "Love All";
         }
     }
 }
