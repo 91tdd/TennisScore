@@ -19,11 +19,6 @@ namespace TennisScore
                 {3, "Forty"},
             };
 
-        public bool IsDeuce()
-        {
-            return this.FirstPlayerScore >= 3;
-        }
-
         public bool IsWin()
         {
             return Math.Abs(this.FirstPlayerScore - this.SecondPlayerScore) > 1;
@@ -59,6 +54,11 @@ namespace TennisScore
         public string SameScore()
         {
             return scoreMapping[this.FirstPlayerScore] + " All";
+        }
+
+        public bool IsDeuce()
+        {
+            return this.FirstPlayerScore >= 3;
         }
     }
 }

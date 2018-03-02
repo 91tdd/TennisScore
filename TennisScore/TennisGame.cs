@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace TennisScore
 {
     public class TennisGame
     {
         private readonly IRepository<Game> _repo;
-
-        private Dictionary<int, string> scoreMapping = new Dictionary<int, string>
-            {
-                {0, "Love"},
-                {1, "Fifteen"},
-                {2, "Thirty"},
-                {3, "Forty"},
-            };
 
         public TennisGame(IRepository<Game> repo)
         {
@@ -29,7 +20,12 @@ namespace TennisScore
                 return game.IsReadyForWin() ? game.AdvStatus() : game.NormalScore();
             }
 
-            return game.IsDeuce() ? "Deuce" : game.SameScore();
+            return game.IsDeuce() ? Deuce() : game.SameScore();
+        }
+
+        private string Deuce()
+        {
+            return "Deuce";
         }
     }
 }

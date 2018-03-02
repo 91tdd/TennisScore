@@ -14,10 +14,10 @@ namespace TennisScore
             var gameId = 1;
 
             GivenPlayerScore(gameId, 0, 0);
-
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Love All", tennisGame.ScoreResult(gameId));
+
+            ScoreShouldBe("Love All", gameId);
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Fifteen Love", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Fifteen Love", gameId);
         }
 
         [TestMethod]
@@ -41,7 +41,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Thirty Love", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Thirty Love", gameId);
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Forty Love", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Forty Love", gameId);
         }
 
         [TestMethod]
@@ -65,7 +65,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Love Fifteen", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Love Fifteen", gameId);
         }
 
         [TestMethod]
@@ -77,7 +77,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Fifteen All", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Fifteen All", gameId);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Deuce", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Deuce", gameId);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Deuce", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Deuce", gameId);
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Joey Adv", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Joey Adv", gameId);
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Tom Adv", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Tom Adv", gameId);
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Joey Win", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Joey Win", gameId);
         }
 
         [TestMethod]
@@ -149,7 +149,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Tom Win", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Tom Win", gameId);
         }
 
         [TestMethod]
@@ -161,7 +161,7 @@ namespace TennisScore
 
             TennisGame tennisGame = new TennisGame(repo);
 
-            ScoreShouldBe("Joey Win", tennisGame.ScoreResult(gameId));
+            ScoreShouldBe("Joey Win", gameId);
         }
 
         private void GivenPlayerScore(int gameId, int firstPlayerScore, int secondPlayerScore)
@@ -169,9 +169,10 @@ namespace TennisScore
             repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore });
         }
 
-        private void ScoreShouldBe(string expected, string scoreResult)
+        private void ScoreShouldBe(string expected, int id)
         {
-            Assert.AreEqual(expected, scoreResult);
+            TennisGame tennisGame = new TennisGame(repo);
+            Assert.AreEqual(expected, tennisGame.ScoreResult(id));
         }
     }
 }
