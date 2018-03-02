@@ -22,6 +22,10 @@ namespace TennisScore
                 {3, "Forty"},
             };
 
+            if (game.SecondPlayerScore > 0)
+            {
+                return "Love " + scoreMapping[game.SecondPlayerScore];
+            }
             if (game.FirstPlayerScore > 0)
             {
                 return scoreMapping[game.FirstPlayerScore] + " Love";
