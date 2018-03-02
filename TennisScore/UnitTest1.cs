@@ -38,6 +38,13 @@ namespace TennisScore
             NewMethod("Thirty Love");
         }
 
+        [TestMethod]
+        public void Forty_Love()
+        {
+            GivenGameRecord(3, 0);
+            NewMethod("Forty Love");
+        }
+
         private void NewMethod(string expected)
         {
             Assert.AreEqual(expected, tennisGame.ScoreResult(gameId));
