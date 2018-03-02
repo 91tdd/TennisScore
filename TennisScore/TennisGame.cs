@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TennisScore
+﻿namespace TennisScore
 {
     public class TennisGame
     {
@@ -12,68 +9,17 @@ namespace TennisScore
             _repo = repo;
         }
 
-        private Dictionary<int, string> scoreLookUp = new Dictionary<int, string>
-        {
-            {0, "Love"},
-            {1, "Fifteen"},
-            {2, "Thirty"},
-            {3, "Forty"},
-        };
-
         public string ScoreResult(int gameId)
         {
             var game = this._repo.GetGame(gameId);
-            return IsDifferentScore(game)
-                ? (IsAlreadyForWin(game) ? AdvStatement(game) : NormalScore(game))
-                : (IsDeuce(game) ? Deuce() : SameScore(game));
-        }
-
-        private static string AdvStatement(Game game)
-        {
-            return AdvPlayer(game) + (IsAdv(game) ? " Adv" : " Win");
-        }
-
-        private string SameScore(Game game)
-        {
-            return scoreLookUp[game.FirstPlayerScore] + " All";
+            return game.IsDifferentScore()
+                ? (game.IsAlreadyForWin() ? game.AdvStatement() : game.NormalScore())
+                : (game.IsDeuce() ? Deuce() : game.SameScore());
         }
 
         private static string Deuce()
         {
             return "Deuce";
-        }
-
-        private static bool IsDeuce(Game game)
-        {
-            return game.FirstPlayerScore >= 3;
-        }
-
-        private static bool IsDifferentScore(Game game)
-        {
-            return game.FirstPlayerScore != game.SecondPlayerScore;
-        }
-
-        private string NormalScore(Game game)
-        {
-            return scoreLookUp[game.FirstPlayerScore] + " " + scoreLookUp[game.SecondPlayerScore];
-        }
-
-        private static bool IsAlreadyForWin(Game game)
-        {
-            return game.FirstPlayerScore > 3 || game.SecondPlayerScore > 3;
-        }
-
-        private static bool IsAdv(Game game)
-        {
-            return Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1;
-        }
-
-        private static string AdvPlayer(Game game)
-        {
-            var advPlayer = game.FirstPlayerScore > game.SecondPlayerScore
-                ? game.FirstPlayerName
-                : game.SecondPlayerName;
-            return advPlayer;
         }
     }
 }
