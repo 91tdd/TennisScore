@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TennisScore
 {
@@ -30,6 +31,11 @@ namespace TennisScore
                     var name = game.FirstPlayerScore > game.SecondPlayerScore
                         ? game.FirstPlayName
                         : game.SecondPlayerName;
+
+                    if (Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) > 1)
+                    {
+                        return name + " Win";
+                    }
 
                     return name + " Adv";
                 }
