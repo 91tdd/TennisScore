@@ -8,6 +8,8 @@ namespace TennisScore
     {
         private IRepository<Game> repo = Substitute.For<IRepository<Game>>();
         private int gameId = 1;
+        private string secondPlayerName = "Tom";
+        private string firstPlayerName = "Joey";
 
         private TennisGame tennisGame;
 
@@ -66,6 +68,13 @@ namespace TennisScore
             NewMethod("Deuce");
         }
 
+        [TestMethod]
+        public void FirstPlayer_Adv()
+        {
+            GivenGameRecord(4, 3, firstPlayerName, secondPlayerName);
+            NewMethod("Joey Adv");
+        }
+
         private void NewMethod(string expected)
         {
             Assert.AreEqual(expected, tennisGame.ScoreResult(gameId));
@@ -74,6 +83,11 @@ namespace TennisScore
         private void GivenGameRecord(int firstPlayerScore, int secondPlayerScore)
         {
             this.repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore });
+        }
+
+        private void GivenGameRecord(int firstPlayerScore, int secondPlayerScore, string firstPlayerName, string secondPlayerName)
+        {
+            this.repo.GetGame(gameId).Returns(new Game { Id = gameId, FirstPlayerScore = firstPlayerScore, SecondPlayerScore = secondPlayerScore, FirstPlayerName = firstPlayerName, SecondPlayerName = secondPlayerName });
         }
     }
 }
