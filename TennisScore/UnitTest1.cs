@@ -23,73 +23,80 @@ namespace TennisScore
         public void Love_All()
         {
             GivenGameRecord(0, 0);
-            NewMethod("Love All");
+            ScoreShouldBe("Love All");
         }
 
         [TestMethod]
         public void Fifteen_Love()
         {
             GivenGameRecord(1, 0);
-            NewMethod("Fifteen Love");
+            ScoreShouldBe("Fifteen Love");
         }
 
         [TestMethod]
         public void Thirty_Love()
         {
             GivenGameRecord(2, 0);
-            NewMethod("Thirty Love");
+            ScoreShouldBe("Thirty Love");
         }
 
         [TestMethod]
         public void Forty_Love()
         {
             GivenGameRecord(3, 0);
-            NewMethod("Forty Love");
+            ScoreShouldBe("Forty Love");
         }
 
         [TestMethod]
         public void Love_Fifteen()
         {
             GivenGameRecord(0, 1);
-            NewMethod("Love Fifteen");
+            ScoreShouldBe("Love Fifteen");
         }
 
         [TestMethod]
         public void Deuce()
         {
             GivenGameRecord(3, 3);
-            NewMethod("Deuce");
+            ScoreShouldBe("Deuce");
         }
 
         [TestMethod]
         public void Deuce_When_4_4()
         {
             GivenGameRecord(4, 4);
-            NewMethod("Deuce");
+            ScoreShouldBe("Deuce");
         }
 
         [TestMethod]
         public void FirstPlayer_Adv()
         {
             GivenGameRecord(4, 3);
-            NewMethod($"{firstPlayerName} Adv");
+            ScoreShouldBe($"{firstPlayerName} Adv");
         }
 
         [TestMethod]
         public void SecondPlayer_Adv()
         {
             GivenGameRecord(3, 4);
-            NewMethod($"{secondPlayerName} Adv");
+            ScoreShouldBe($"{secondPlayerName} Adv");
         }
 
         [TestMethod]
         public void FirstPlayer_Win()
         {
             GivenGameRecord(5, 3);
-            NewMethod($"{firstPlayerName} Win");
+            ScoreShouldBe($"{firstPlayerName} Win");
         }
 
-        private void NewMethod(string expected)
+        [TestMethod]
+        public void Fifteen_All()
+        {
+            GivenGameRecord(1, 1);
+            ScoreShouldBe("Fifteen All");
+        }
+
+        private void ScoreShouldBe(string expected)
         {
             Assert.AreEqual(expected, tennisGame.ScoreResult(gameId));
         }
