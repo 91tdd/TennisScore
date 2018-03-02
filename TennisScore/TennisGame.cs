@@ -11,23 +11,20 @@ namespace TennisScore
             _repo = repo;
         }
 
+        private Dictionary<int, string> scoreLookUp = new Dictionary<int, string>
+        {
+            {0, "Love"},
+            {1, "Fifteen"},
+            {2, "Thirty"},
+            {3, "Forty"},
+        };
+
         public string ScoreResult(int gameId)
         {
             var game = this._repo.GetGame(gameId);
-
-            Dictionary<int, string> scoreLookUp = new Dictionary<int, string>
+            if (game.FirstPlayerScore != game.SecondPlayerScore)
             {
-                {1, "Fifteen"},
-                {2, "Thirty"},
-                {3, "Forty"},
-            };
-            if (game.SecondPlayerScore > 0)
-            {
-                return "Love " + scoreLookUp[game.SecondPlayerScore];
-            }
-            if (game.FirstPlayerScore > 0)
-            {
-                return scoreLookUp[game.FirstPlayerScore] + " Love";
+                return scoreLookUp[game.FirstPlayerScore] + " " + scoreLookUp[game.SecondPlayerScore];
             }
             return "Love All";
         }
