@@ -82,6 +82,13 @@ namespace TennisScore
             NewMethod($"{secondPlayerName} Adv");
         }
 
+        [TestMethod]
+        public void FirstPlayer_Win()
+        {
+            GivenGameRecord(5, 3);
+            NewMethod($"{firstPlayerName} Win");
+        }
+
         private void NewMethod(string expected)
         {
             Assert.AreEqual(expected, tennisGame.ScoreResult(gameId));
