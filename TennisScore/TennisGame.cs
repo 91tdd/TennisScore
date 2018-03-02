@@ -1,4 +1,6 @@
-﻿namespace TennisScore
+﻿using System.Collections.Generic;
+
+namespace TennisScore
 {
     public class TennisGame
     {
@@ -13,13 +15,15 @@
         {
             var game = this._repo.GetGame(gameId);
 
-            if (game.FirstPlayerScore == 2)
+            Dictionary<int, string> scoreMapping = new Dictionary<int, string>
             {
-                return "Thirty Love";
-            }
-            if (game.FirstPlayerScore == 1)
+                {1, "Fifteen"},
+                {2, "Thirty"},
+            };
+
+            if (game.FirstPlayerScore > 0)
             {
-                return "Fifteen Love";
+                return scoreMapping[game.FirstPlayerScore] + " Love";
             }
 
             return "Love All";
