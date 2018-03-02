@@ -28,16 +28,7 @@ namespace TennisScore
             {
                 if (game.FirstPlayerScore > 3 || game.SecondPlayerScore > 3)
                 {
-                    var name = game.FirstPlayerScore > game.SecondPlayerScore
-                        ? game.FirstPlayName
-                        : game.SecondPlayerName;
-
-                    if (Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) > 1)
-                    {
-                        return name + " Win";
-                    }
-
-                    return name + " Adv";
+                    return AdvName(game) + (IsWin(game) ? " Win" : " Adv");
                 }
 
                 return scoreMapping[game.FirstPlayerScore] + " " + scoreMapping[game.SecondPlayerScore];
@@ -49,6 +40,18 @@ namespace TennisScore
             }
 
             return scoreMapping[game.FirstPlayerScore] + " All";
+        }
+
+        private static string AdvName(Game game)
+        {
+            return game.FirstPlayerScore > game.SecondPlayerScore
+                ? game.FirstPlayName
+                : game.SecondPlayerName;
+        }
+
+        private static bool IsWin(Game game)
+        {
+            return Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) > 1;
         }
     }
 }
