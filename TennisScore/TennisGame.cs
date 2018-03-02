@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TennisScore
 {
@@ -24,6 +25,13 @@ namespace TennisScore
             var game = this._repo.GetGame(gameId);
             if (game.FirstPlayerScore != game.SecondPlayerScore)
             {
+                if (game.FirstPlayerScore > 3)
+                {
+                    if (Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
+                    {
+                        return game.FirstPlayerName + " Adv";
+                    }
+                }
                 return scoreLookUp[game.FirstPlayerScore] + " " + scoreLookUp[game.SecondPlayerScore];
             }
 
