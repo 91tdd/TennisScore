@@ -25,14 +25,11 @@ namespace TennisScore
             var game = this._repo.GetGame(gameId);
             if (game.FirstPlayerScore != game.SecondPlayerScore)
             {
-                if (game.FirstPlayerScore > 3 || game.SecondPlayerScore > 3)
+                if (IsAlreadyForWin(game))
                 {
-                    if (Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
+                    if (IsAdv(game))
                     {
-                        var advPlayer = game.FirstPlayerScore > game.SecondPlayerScore
-                            ? game.FirstPlayerName
-                            : game.SecondPlayerName;
-                        return advPlayer + " Adv";
+                        return AdvPlayer(game) + " Adv";
                     }
                 }
                 return scoreLookUp[game.FirstPlayerScore] + " " + scoreLookUp[game.SecondPlayerScore];
@@ -43,6 +40,24 @@ namespace TennisScore
                 return "Deuce";
             }
             return "Love All";
+        }
+
+        private static bool IsAlreadyForWin(Game game)
+        {
+            return game.FirstPlayerScore > 3 || game.SecondPlayerScore > 3;
+        }
+
+        private static bool IsAdv(Game game)
+        {
+            return Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1;
+        }
+
+        private static string AdvPlayer(Game game)
+        {
+            var advPlayer = game.FirstPlayerScore > game.SecondPlayerScore
+                ? game.FirstPlayerName
+                : game.SecondPlayerName;
+            return advPlayer;
         }
     }
 }
