@@ -15,7 +15,17 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
-            throw new NotImplementedException();
+            if (game.IsNormalScore())
+            {
+                return game.IsReadyForWin() ? game.AdvStatus() : game.NormalScore();
+            }
+
+            return game.IsDeuce() ? Deuce() : game.SameScore();
+        }
+
+        private string Deuce()
+        {
+            return "Deuce";
         }
     }
 }
